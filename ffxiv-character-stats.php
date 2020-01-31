@@ -35,11 +35,20 @@ if (!defined('ABSPATH')) {
     return;
 }
 
- register_activation_hook(  __FILE__, '');
- register_deactivation_hook( __FILE__, '');
- register_uninstall_hook( __FILE__, '');
+define('FFXIV_PLUGIN_VERSION', '1.0');
+define('FFXIV_PLUGIN_BASENAME', function_exists('plugin_basename') ? plugin_basename(__FILE__) :
+    basename(dirname(__FILE__)) . '/' . basename(__FILE__));
 
- // When plugin is activated, add the necessary database tables to store data
- function ffxiv_create_database_tables() {
-     // TODO: Add code to create database tables
- }
+global $wp_plugin_paths;
+foreach ($wp_plugin_paths as $dir => $realdir) {
+    if (strpos(__FILE__, $realdir) === 0) {
+        define('FFXIV_PLUGIN_FCPATH', $dir . '/' . basename(__FILE__));
+        define('FFXIV_PLUGIN_PATH', trailingslashit($dir));
+        break;
+    }
+}
+
+if (!defined('FFXIV_PLUGIN_FCPATH')) {
+    define('FFXIV_PLUGIN_FCPATH', __FILE__);
+    define('FFXIV_PLUGIN_PATH', trailingslashit(dirname(FFXIV_PLUGIN_FCPATH)));
+}
