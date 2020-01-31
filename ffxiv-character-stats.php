@@ -1,6 +1,7 @@
 <?php
     /**
      * Plugin Name:     Final Fantasy XIV Character Statistics
+     * Plugin URI:      https://ffxiv.stelth2000inc.com
      * Description:     Pull Final Fantasy XIV character data using XIVAPI.
      * Version:         1.0
      * Requires PHP:    7.3
